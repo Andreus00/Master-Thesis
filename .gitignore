@@ -16,3 +16,4 @@ smpl/smpl_vert_segmentation.json
 evaluation/models/HaveFun/out
 evaluation/models/HaveFun/pretrained_dfmodel
 evaluation/models/HaveFun/data
+*__pycache__*
