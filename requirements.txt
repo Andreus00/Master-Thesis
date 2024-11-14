@@ -1,0 +1,6 @@
+trimesh
+smplx
+matplotlib
+-e pycpd
+e3nn 
+einops

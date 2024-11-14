@@ -1,0 +1,7 @@
+{
+    "python.analysis.extraPaths": [
+        "./ext/gaussian-splatting"
+    ],
+    "workbench.editor.showTabs": "multiple",
+    "cmake.sourceDirectory": "/home/andrea/Documents/ComputerScience/thesis/testing/Baseline/ext/gaussian-splatting/SIBR_viewers/extlibs/imgui/subbuild",
+}
