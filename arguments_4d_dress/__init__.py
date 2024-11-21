@@ -16,6 +16,7 @@ class ModelParams4dDress(ParamGroup):
         self.outfit = "Outer"
         self.seq = "Take9"
         self.gender = "neutral"
+        self.frame = 0
         self.eval = False
         self.num_pts = 10_000
         self.obj_path = ""

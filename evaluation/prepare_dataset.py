@@ -458,27 +458,45 @@ if __name__ == '__main__':
     dataset = {}
     
     # subjects = os.listdir(dataset_path)
-    samples = sorted(os.listdir(dataset_path))
+    samples = [x for x in sorted(os.listdir(dataset_path)) if os.path.isdir(os.path.join(dataset_path, x))]
+    
+    print(f'Samples: {samples}')
+    print(f'Found {len(samples)} subjects')
     
     num_samples_per_subject = 10
     
-    for sample in tqdm.tqdm(samples):
-        for i in range(num_samples_per_subject):
-            get_first = i == 0
-            
-            outfit = sample[-5:]
+    pbar = tqdm.tqdm(samples)
+    
+    for sample in pbar:
+        
+        sampled = 0
+        
+        while sampled < num_samples_per_subject:
+            try:
+                pbar.set_description(f'Sampled {sampled}/{num_samples_per_subject} from {sample}')
+                get_first = sampled == 0
                 
-            subject = sample[:-5]
-            
-            subject_path = os.path.join(dataset_path, sample, outfit)
-            
-            src_sample = sample_subject(subject, subject_path, outfit, get_first=get_first)
-            
-            subject_id = f'{subject}_{outfit}'
-            
-            sample_id = f'{src_sample["take"]}_{src_sample["frame"]}'
-            
-            dataset[subject_id] = {sample_id: src_sample}
+                outfit = sample[-5:]
+                    
+                subject = sample[:-5]
+                
+                subject_path = os.path.join(dataset_path, sample, outfit)
+                
+                src_sample = sample_subject(subject, subject_path, outfit, get_first=get_first)
+                
+                subject_id = f'{subject}_{outfit}'
+                
+                sample_id = f'{src_sample["take"]}_{src_sample["frame"]}'
+                
+                if not subject_id in dataset:
+                    dataset[subject_id] = {sample_id: src_sample}
+                else:
+                    dataset[subject_id][sample_id] = src_sample
+                
+                sampled += 1
+            except FileNotFoundError as e:
+                print(e)
+                continue
             
     with open(os.path.join(output_dataset_path, 'dataset.pkl'), 'wb') as f:
         pickle.dump(dataset, f)

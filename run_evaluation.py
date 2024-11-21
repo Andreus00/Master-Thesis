@@ -11,6 +11,7 @@ from PIL import Image
 import torch
 import sys
 from evaluation.metric_utils.metrics import Metrics
+import tqdm
 
 from evaluation.models import models
 
@@ -62,7 +63,9 @@ def main(args):
     psnr = 0
     lpips = 0
     
-    for i, data in dataset.items():
+    pbar = tqdm.tqdm(dataset.items())
+    
+    for i, data in pbar:
         source_data, target_data = prepare_batch(data)
         
         # clone cameras

@@ -16,7 +16,7 @@ from utils.system_utils import searchForMaxIteration
 from scene_4ddress.dataset_readers import sceneLoadTypeCallbacks
 from scene_4ddress.gaussian_model import IsotropicGaussianModel, GaussianModel, GaussianAvatar
 
-from scene_4ddress.gaussian_model_lbs import GaussianAvatar as GaussianAvatarCopy, GaussianAvatar2 as GaussianAvatarCopy2
+from scene_4ddress.gaussian_model_lbs import GaussianAvatar2 as GaussianAvatarCopy2
 
 from arguments import ModelParams
 from arguments_4d_dress import ModelParams4dDress

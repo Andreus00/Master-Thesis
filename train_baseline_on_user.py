@@ -299,13 +299,12 @@ if __name__ == "__main__":
         lp.source_path = lp.source_path[:-1]
     lp.subj, lp.outfit, lp.seq = lp.source_path.split("/")[-3:]
     
-    for id in ids:
-        lp.id = id
-        lp.obj_path = os.path.join(lp.source_path, "Meshes_pkl/mesh-" + id + ".pkl")
-        lp.model_path = None
+    _id = ids[lp.frame]
+    lp.id = _id
+    lp.obj_path = os.path.join(lp.source_path, "Meshes_pkl/mesh-" + _id + ".pkl")
+    lp.model_path = None
 
-        training(lp, op.extract(args), pp.extract(args), args.test_iterations, args.save_iterations, args.checkpoint_iterations, args.start_checkpoint, args.debug_from)
-        exit()
+    training(lp, op.extract(args), pp.extract(args), args.test_iterations, args.save_iterations, args.checkpoint_iterations, args.start_checkpoint, args.debug_from)
 
     # All done
     print("\nTraining complete.")
